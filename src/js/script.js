@@ -1,4 +1,5 @@
-import axios from "axios"
+
+
 
 async function requestPollutionData() {
   const API_KEY = process.env.API_KEY;
