@@ -8,16 +8,29 @@ async function requestPollutionData(city) {
   const API_KEY = process.env.API_KEY;
   const result = await axios.get(`https://api.waqi.info/search/?token=${API_KEY}&keyword=${city}`);
   console.log(result);
-  let cityNameData = result.data.data[0].station.name;
-  let cityAqi = result.data.data[0].aqi;
-  resultParagraph.innerHTML = `The Air Quality score in ${cityNameData.bold()} is ${cityAqi.bold()}.`;
+  try {
+    let cityNameData = result.data.data[0].station.name;
+    let cityAqi = result.data.data[0].aqi;
+    resultParagraph.innerHTML = `The Air Quality score in ${cityNameData.bold()} is ${cityAqi.bold()}.`;
+  } catch {
+    alert("City not found in database. Try another city.");
+  }
 }
 
 let getCityInput = function() {
-  let city = document.getElementById("city-field").value;
-  console.log(city);
-  requestPollutionData(city);
-  event.preventDefault();
+  try {
+    event.preventDefault();
+    let city = document.getElementById("city-field").value;
+
+    if (city.length == 0) {
+      throw new SyntaxError("The form must contain a name.");
+    }
+
+    console.log(city);
+    requestPollutionData(city);
+  } catch (err) {
+    alert(err.message);
+  }
 };
 
 cityForm.addEventListener ("submit", getCityInput);
