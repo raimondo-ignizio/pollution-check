@@ -6,7 +6,7 @@ import red from "./img/icon/red-thumb.png";
 
 let cityForm = document.getElementById("city-selection");
 let resultParagraph = document.getElementById("pollution-data");
-let iconsContainer = document.getElementById("data-container");
+let iconsContainer = document.getElementById("icons-container");
 
 let setIcon = function(color) {
   const icon = new Image();

@@ -5,7 +5,7 @@ import orange from "./img/icon/orange-thumb.png";
 import red from "./img/icon/red-thumb.png";
 
 let resultParagraph = document.getElementById("pollution-data");
-let iconsContainer = document.getElementById("data-container");
+let iconsContainer = document.getElementById("icons-container");
 
 let setIcon = function(color) {
   const icon = new Image();
@@ -29,7 +29,8 @@ async function callLambdaFunction(city) {
     console.log(response);
     let cityNameData = response.data.name;
     let cityAqi = response.data.aqi;
-    resultParagraph.innerHTML = `The Air Pollution score in ${cityNameData.bold()} is ${cityAqi.bold()}.`;
+    resultParagraph.innerHTML = `The Air Pollution score in
+                                ${cityNameData.bold()} is ${cityAqi.bold()}.`;
     switch (true) {
       case cityAqi < 99:
         setIcon(green);
