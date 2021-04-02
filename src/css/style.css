@@ -6,4 +6,67 @@
 
 body {
   background-color: #48cae4;
+  text-align: center;
+  margin: 25% auto;
+}
+
+#form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#form-container h1 {
+  margin-bottom: 10%;
+}
+
+#city-selection {
+  display: flex;
+  justify-content: center;
+}
+
+#city-selection input {
+  width: 200px;
+  height: 25px;
+  font-size: 15px;
+}
+
+#pollution-data {
+  margin: 20% 10px;
+  font-size: 18px;
+}
+
+.result-icon {
+  width: 128px;
+  height: 128px;
+}
+
+@media only screen and (min-width: 768px) {
+  #data-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .result-icon {
+    margin-top: 90px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+
+  #form-container h1 {
+    font-size: 60px;
+  }
+
+  #city-selection input {
+    width: 300px;
+    height: 40px;
+    font-size: 26px;
+  }
+
+  #city-selection button {
+    height: 40px;
+    width: 70px;
+    font-size: 18px;
+  }
 }

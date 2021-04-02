@@ -17,6 +17,10 @@ module.exports = (env, argv) => {
         {
           test: /\.css$/,
           use: ["style-loader", "css-loader"]
+        },
+        {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
         }
       ]
     },
@@ -28,6 +32,7 @@ module.exports = (env, argv) => {
       new HtmlWebpackPlugin({
         title: "Pollution Check",
         template: path.resolve(__dirname, "./src/index.html"),
+        favicon: "src/img/icon/pollution.png",
       }),
       new Dotenv()
     ]
