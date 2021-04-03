@@ -1,8 +1,8 @@
 import axios from "axios";
-import "./css/style.css";
-import green from "./img/icon/green-thumb.png";
-import orange from "./img/icon/orange-thumb.png";
-import red from "./img/icon/red-thumb.png";
+import "/src/css/style.css";
+import green from "/src/img/icon/green-thumb.png";
+import orange from "/src/img/icon/orange-thumb.png";
+import red from "/src/img/icon/red-thumb.png";
 
 let cityForm = document.getElementById("city-selection");
 let resultParagraph = document.getElementById("pollution-data");
@@ -19,8 +19,6 @@ let setIcon = function(color) {
     iconsContainer.appendChild(icon);
   }
 };
-
-
 
 async function requestPollutionData(city) {
   const API_KEY = process.env.API_KEY;
@@ -61,5 +59,20 @@ let getCityInput = function() {
     alert(err.message);
   }
 };
+
+async function reverseGeocoding(lat, long) {
+  const API_KEY = process.env.LOCATION_API_KEY;
+  const result = await axios.get(`https://eu1.locationiq.com/v1/reverse.php?key=${API_KEY}&lat=${lat}&lon=${long}&format=json`);
+  let city = result.data.address.city;
+  requestPollutionData(city);
+}
+
+let geolocationSuccess = function(pos) {
+  let lat = pos.coords.latitude;
+  let long = pos.coords.longitude;
+  reverseGeocoding(lat, long);
+};
+
+navigator.geolocation.getCurrentPosition(geolocationSuccess);
 
 cityForm.addEventListener ("submit", getCityInput);

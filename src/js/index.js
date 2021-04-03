@@ -1,8 +1,8 @@
 import axios from "axios";
-import "./css/style.css";
-import green from "./img/icon/green-thumb.png";
-import orange from "./img/icon/orange-thumb.png";
-import red from "./img/icon/red-thumb.png";
+import "/src/css/style.css";
+import green from "/src/img/icon/green-thumb.png";
+import orange from "/src/img/icon/orange-thumb.png";
+import red from "/src/img/icon/red-thumb.png";
 
 let resultParagraph = document.getElementById("pollution-data");
 let iconsContainer = document.getElementById("icons-container");
@@ -19,7 +19,7 @@ let setIcon = function(color) {
   }
 };
 
-async function callLambdaFunction(city) {
+async function callLambdaPollution(city) {
   try {
     const response = await axios.get("/.netlify/functions/getPollution", {
       params: {
@@ -57,11 +57,30 @@ let getCityInput = function() {
     }
 
     console.log(city);
-    callLambdaFunction(city);
+    callLambdaPollution(city);
   } catch (err) {
     alert(err.message);
   }
 };
+
+async function callLambdaGeocoding(lat, long) {
+  const response = await axios.get(".netlify/functions/reverseGeocoding", {
+    params: {
+      lat: lat,
+      long: long
+    }
+  });
+  let city = response.data;
+  callLambdaPollution(city);
+}
+
+let geolocationSuccess = function(pos) {
+  let lat = pos.coords.latitude;
+  let long = pos.coords.longitude;
+  callLambdaGeocoding(lat, long);
+};
+
+navigator.geolocation.getCurrentPosition(geolocationSuccess);
 
 let cityForm = document.getElementById("city-selection");
 cityForm.addEventListener ("submit", getCityInput);

@@ -3,7 +3,7 @@ const Dotenv = require("dotenv-webpack")
 const path = require("path")
 
 module.exports = (env, argv) => {
-  const entryPath = argv.mode === "development" ? "./src/index_dev.js" : "./src/index.js"
+  const entryPath = argv.mode === "development" ? "./src/js/index_dev.js" : "./src/js/index.js"
   return {
     entry: {
       main: path.resolve(__dirname, entryPath),
