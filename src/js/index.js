@@ -70,7 +70,7 @@ async function callLambdaGeocoding(lat, long) {
       long: long
     }
   });
-  let city = response.data;
+  let city = response.data.city;
   callLambdaPollution(city);
 }
 
