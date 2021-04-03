@@ -29,8 +29,8 @@ async function callLambdaPollution(city) {
     console.log(response);
     let cityNameData = response.data.name;
     let cityAqi = response.data.aqi;
-    resultParagraph.innerHTML = `The Air Pollution score in
-                                ${cityNameData.bold()} is ${cityAqi.bold()}.`;
+    resultParagraph.innerHTML = `The Air Pollution value in
+                                ${cityNameData.italics()} is ${cityAqi.bold()}.`;
     switch (true) {
       case cityAqi < 99:
         setIcon(green);
@@ -43,7 +43,7 @@ async function callLambdaPollution(city) {
         break;
     }
   } catch {
-    alert("City not found in database. Try another city.");
+    alert("Your city is not present in the database. Try another city.");
   }
 }
 

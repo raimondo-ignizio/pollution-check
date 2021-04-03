@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #48cae4;
+  background-color: #48CAE4;
   text-align: center;
   margin: 25% auto;
 }
@@ -32,7 +32,7 @@ body {
 }
 
 #pollution-data {
-  margin: 20% 10px;
+  margin: 15% 10px;
   font-size: 18px;
 }
 
@@ -41,21 +41,46 @@ body {
   height: 128px;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 899px) {
   #data-container {
     display: flex;
     justify-content: space-around;
   }
 
   .result-icon {
-    margin-top: 90px;
+    margin-top: 60px;
   }
 }
 
 @media only screen and (min-width: 900px) {
+  body {
+    background-color: #1D3557;
+    margin: 7% auto;
+  }
+
+  div {
+    background-color: #48CAE4;
+    margin: 0 15%;
+  }
+
+  #data-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #pollution-data {
+    font-size: 24px;
+    margin: 5% auto;
+  }
+
+  .result-icon {
+    margin-bottom: 40px;
+    width: 192px;
+    height: 192px;
+  }
 
   #form-container h1 {
-    font-size: 60px;
+    font-size: 55px;
   }
 
   #city-selection input {

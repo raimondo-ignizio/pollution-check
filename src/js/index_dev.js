@@ -27,7 +27,7 @@ async function requestPollutionData(city) {
   try {
     let cityNameData = result.data.data[0].station.name;
     let cityAqi = result.data.data[0].aqi;
-    resultParagraph.innerHTML = `The Air Pollution score in ${cityNameData.bold()} is ${cityAqi.bold()}.`;
+    resultParagraph.innerHTML = `The Air Pollution value in ${cityNameData.italics()} is ${cityAqi.bold()}.`;
     switch (true) {
       case cityAqi < 99:
         setIcon(green);
@@ -40,7 +40,7 @@ async function requestPollutionData(city) {
         break;
     }
   } catch {
-    alert("City not found in database. Try another city.");
+    alert("Your city is not present in the database. Try another city.");
   }
 }
 
