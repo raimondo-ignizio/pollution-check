@@ -11,7 +11,6 @@ To try it [click here](https://pollutioncheck.netlify.app/).
 - Axios
 - Netlify (for deploy)
 - AICQN API
-- LocationIQ API
 
 ## Usage
-The application will initially try to get the user's location and display its air quality if available, if the air monitoring it's not available in the user's location then an error message is shown and the app will wait for a manually specified location.
+The application will initially try to get the user's location and display its air quality if available, if the air monitoring it's not available in the user's location it shows the data from the nearest station to the user's coordinates, then the app will also accept a manually specified location.
