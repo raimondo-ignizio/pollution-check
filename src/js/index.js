@@ -26,7 +26,6 @@ async function callLambdaPollution(city) {
         city: city
       }
     });
-    console.log(response);
     let cityNameData = response.data.name;
     let cityAqi = response.data.aqi;
     resultParagraph.innerHTML = `The Air Pollution value in
@@ -56,7 +55,6 @@ let getCityInput = function() {
       throw new SyntaxError("The form must contain a name.");
     }
 
-    console.log(city);
     callLambdaPollution(city);
   } catch (err) {
     alert(err.message);
