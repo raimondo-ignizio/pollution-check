@@ -3,7 +3,7 @@ An app for the JavaScript Advanced Project on Start2Impact.
 
 ## Description
 This application allows the user to see the air quality in their location (or a desired one, writible in the form) through the AICQN API.
-To try it [click here](https://pollutioncheck.netlify.app/).
+[Click here](https://pollutioncheck.netlify.app/) to try it.
 
 ## What I used
 - Webpack
