@@ -28,8 +28,7 @@ async function callLambdaPollution(city) {
     });
     let cityNameData = response.data.name;
     let cityAqi = response.data.aqi;
-    resultParagraph.innerHTML = `The Air Pollution value in
-                                ${cityNameData.italics()} is ${cityAqi.bold()}.`;
+    resultParagraph.innerHTML = `The Air Pollution value in ${cityNameData.italics()} is ${cityAqi.bold()}.`;
     switch (true) {
       case cityAqi < 99:
         setIcon(green);
@@ -42,7 +41,7 @@ async function callLambdaPollution(city) {
         break;
     }
   } catch {
-    alert("Your city is not present in the database. Try another city.");
+    alert("City not present in database. Try another city.");
   }
 }
 
@@ -61,21 +60,33 @@ let getCityInput = function() {
   }
 };
 
-async function callLambdaGeocoding(lat, long) {
+async function callLambdaGps(lat, long) {
   const response = await axios.get(".netlify/functions/reverseGeocoding", {
     params: {
       lat: lat,
       long: long
     }
   });
-  let city = response.data.city;
-  callLambdaPollution(city);
+  let cityNameData = response.data.name;
+  let cityAqi = response.data.aqi;
+  resultParagraph.innerHTML = `The Air Pollution value in ${cityNameData.italics()} is ${cityAqi.bold()}.`;
+  switch (true) {
+    case cityAqi < 99:
+      setIcon(green);
+      break;
+    case cityAqi > 99 && cityAqi < 149:
+      setIcon(orange);
+      break;
+    case cityAqi >149:
+      setIcon(red);
+      break;
+  }
 }
 
 let geolocationSuccess = function(pos) {
   let lat = pos.coords.latitude;
   let long = pos.coords.longitude;
-  callLambdaGeocoding(lat, long);
+  callLambdaGps(lat, long);
 };
 
 navigator.geolocation.getCurrentPosition(geolocationSuccess);

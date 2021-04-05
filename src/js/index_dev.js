@@ -39,7 +39,7 @@ async function requestPollutionData(city) {
         break;
     }
   } catch {
-    alert("Your city is not present in the database. Try another city.");
+    alert("City not present in database. Try another city.");
   }
 }
 
@@ -58,17 +58,29 @@ let getCityInput = function() {
   }
 };
 
-async function reverseGeocoding(lat, long) {
-  const API_KEY = process.env.LOCATION_API_KEY;
-  const result = await axios.get(`https://eu1.locationiq.com/v1/reverse.php?key=${API_KEY}&lat=${lat}&lon=${long}&format=json`);
-  let city = result.data.address.city;
-  requestPollutionData(city);
+async function getPollutionFromGps(lat, long) {
+  const API_KEY = process.env.API_KEY;
+  const result = await axios.get(`https://api.waqi.info/feed/geo:${lat};${long}/?token=${API_KEY}`);
+    let cityNameData = result.data.data.city.name;
+    let cityAqi = result.data.data.aqi;
+    resultParagraph.innerHTML = `The Air Pollution value in ${cityNameData.italics()} is <b>${cityAqi}</b>.`;
+    switch (true) {
+      case cityAqi < 99:
+        setIcon(green);
+        break;
+      case cityAqi > 99 && cityAqi < 149:
+        setIcon(orange);
+        break;
+      case cityAqi >149:
+        setIcon(red);
+        break;
+    }
 }
 
 let geolocationSuccess = function(pos) {
   let lat = pos.coords.latitude;
   let long = pos.coords.longitude;
-  reverseGeocoding(lat, long);
+  getPollutionFromGps(lat, long);
 };
 
 navigator.geolocation.getCurrentPosition(geolocationSuccess);

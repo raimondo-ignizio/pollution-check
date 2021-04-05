@@ -1,12 +1,13 @@
 const axios = require("axios");
 
 exports.handler = async function (event, context) {
-  const API_KEY = process.env.LOCATION_API_KEY;
+  const API_KEY = process.env.API_KEY;
   const lat = event.queryStringParameters.lat;
   const long = event.queryStringParameters.long;
-  const response = await axios.get(`https://eu1.locationiq.com/v1/reverse.php?key=${API_KEY}&lat=${lat}&lon=${long}&format=json`);
+  const response = await axios.get(`https://api.waqi.info/feed/geo:${lat};${long}/?token=${API_KEY}`);
   const data = {
-    city: response.data.address.city
+    name: response.data.data.city.name,
+    aqi: response.data.data.aqi
   };
 
   return {
