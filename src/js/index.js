@@ -61,7 +61,7 @@ let getCityInput = function() {
 };
 
 async function callLambdaGps(lat, long) {
-  const response = await axios.get(".netlify/functions/reverseGeocoding", {
+  const response = await axios.get(".netlify/functions/getPollutionFromGps", {
     params: {
       lat: lat,
       long: long
@@ -69,7 +69,7 @@ async function callLambdaGps(lat, long) {
   });
   let cityNameData = response.data.name;
   let cityAqi = response.data.aqi;
-  resultParagraph.innerHTML = `The Air Pollution value in ${cityNameData.italics()} is ${cityAqi.bold()}.`;
+  resultParagraph.innerHTML = `The Air Pollution value in ${cityNameData.italics()} is <b>${cityAqi}</b>.`;
   switch (true) {
     case cityAqi < 99:
       setIcon(green);
